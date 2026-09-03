@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Share+Tech+Mono&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0c1210;
+  --color-bg-elevated: #121a16;
+  --color-surface: #161e1a;
+  --color-fg: #d5dfd4;
+  --color-fg-muted: #8a9888;
+  --color-fg-subtle: #5c6a5a;
+  --color-olive: #8ea574;
+  --color-olive-dim: #5a6b4e;
+  --color-codec: #7dba6a;
+  --color-caution: #c4b15a;
+  --color-alert: #c45c4a;
+  --color-bezel: #0a0e0c;
+  --color-border: color-mix(in oklab, #d5dfd4 14%, transparent);
+  --color-border-strong: color-mix(in oklab, #d5dfd4 26%, transparent);
+
+  --font-display: "Barlow Condensed", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Share Tech Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-sans: "Share Tech Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --motion-slow: 400ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html,
+  body,
+  #app {
+    height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  html,
+  body {
+    overflow: hidden;
+    touch-action: none;
+    overscroll-behavior: none;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.crt-bezel {
+  box-shadow:
+    inset 0 0 80px color-mix(in oklab, #000 35%, transparent),
+    inset 0 0 0 1px color-mix(in oklab, #d5dfd4 8%, transparent);
+}
+
+.crt-scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    color-mix(in oklab, #0c1210 0%, transparent) 0px,
+    color-mix(in oklab, #0c1210 0%, transparent) 2px,
+    color-mix(in oklab, #0c1210 18%, transparent) 3px
+  );
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.crt-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 52%,
+    color-mix(in oklab, #0c1210 55%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
+.crt-glow {
+  box-shadow: inset 0 0 60px color-mix(in oklab, #8ea574 12%, transparent);
+  pointer-events: none;
+}
+
+.hud-panel {
+  background: color-mix(in oklab, var(--color-bg) 72%, transparent);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(6px);
+}
+
+@keyframes alert-pulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes caution-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alert-pulse,
+  .caution-pulse {
+    animation: none;
+  }
+}
